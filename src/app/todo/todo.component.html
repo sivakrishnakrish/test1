@@ -1,0 +1,25 @@
+<input
+  type="text"
+  class="textBar"
+  [(ngModel)]="todo"
+  placeholder="Enter your todo list"
+/>
+<button (click)="addTodo()" *ngIf="!editMode">Add</button>
+<button (click)="update()" *ngIf="editMode">Edit</button>
+
+<ul>
+  <li
+    *ngFor="let item of todoList; let i = index"
+    [ngStyle]="{
+      'text-decoration': item.completed === true ? 'line-through' : 'none'
+    }"
+    (click)="editTodo(item)"
+  >
+    {{ item.todoTitle }}
+    <input
+      type="checkbox"
+      *ngIf="!item.completed"
+      (click)="completeTodo(item, i)"
+    />
+  </li>
+</ul>
